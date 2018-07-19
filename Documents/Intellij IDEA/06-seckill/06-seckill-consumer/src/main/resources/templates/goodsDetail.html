@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <title>Title</title>
+</head>
+<body th:inline="text" th:style="'margin:50px;'" style="padd">
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+
+            <!--左边的div-->
+            <div th:style="'float:left;'">
+                <img th:src="@{${goods.imageurl}}">
+            </div>
+
+            <!--右边的div-->
+            <div th:style="'float:left; padding:30px;'">
+                <p>
+                    [[${goods.name}]] [[${goods.name}]]
+                </p>
+
+                <p>
+                    ￥:[[${goods.price}]]
+                </p>
+
+                <p>
+                    [[${goods.store}]] 件
+                </p>
+
+                <p>
+                <div id="seckillButton">秒杀按钮</div>
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+    <script type="text/javascript" th:src="@{/js/goodsSeckill.js}"></script>
+    <script th:src="@{/js/jquery.countdown.min.js}"></script>
+    <script th:type="'text/javascript'" th:inline="javascript">
+        $(function(){
+
+            goodsSeckill.contextPath = [[${#request.getContextPath()}]];
+            //初始化秒杀按钮
+            goodsSeckill.func.initSeckillButton([[${goods.id}]] , [[${goods.starttime.getTime()}]] , [[${goods.endtime.getTime()}]] , [[${systemTime}]]);
+        });
+
+    </script>
+</body>
+</html>

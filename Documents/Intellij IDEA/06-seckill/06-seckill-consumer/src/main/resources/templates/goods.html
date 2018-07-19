@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+    <!--不能这么写-->
+    <!--<script th:src="@{/js/bootstrap.min.js}" />-->
+    <!--<script th:src="@{/js/jquery.min.js}" />-->
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <title>商品信息</title>
+</head>
+<body th:style="'margin:50px;'" th:inline="text">
+
+<table class="table table-striped">
+
+    <tbody>
+
+    <tr>
+        <!--循环出所有的商品信息-->
+        <span th:each="goods : ${goodsList}">
+            <td>
+                <!--每一列展示出图片和价格链接-->
+                <p>
+                    <a th:href="@{'/seckill/goods/'+${goods.id}}" th:target="'_blank'">
+                        <img th:src="@{${goods.imageurl}}">
+                    </a>
+                </p>
+                <p>
+                    <a th:href="@{'/seckill/goods/'+${goods.id}}" th:target="'_blank'">
+                        [[${goods.name}]] [[${goods.namedesc}]]
+                    </a>
+                </p>
+            </td>
+
+            <span th:if="${goodsStat.count} % 4 == 0">
+                <span th:utext="${'</tr><tr>'}" />
+            </span>
+        </span>
+
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
